@@ -1,46 +1,50 @@
-# Getting Started with Create React App
+# ユーザー管理アプリ
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+[こちら](https://www.udemy.com/course/react_stepup/?couponCode=ST6MT42324)の講座を参考に作成。
 
-## Available Scripts
 
-In the project directory, you can run:
+## バージョンの違い  
 
-### `npm start`
+- React
+  - "17.0.0" → "^18.2.0"
+- react-router-dom
+  - "5.2.0" → "^6.22.3"
+- TypeScript
+  - "4.1.3" →  "^4.9.5"
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### 学習メモ  
+バージョンの違いによる修正や環境構築を自分で行ったため、そのメモを下記に記す。
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+**環境構築**  
 
-### `npm test`
+https://nodejs.org/en で nodeのインストール  
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Reactアプリの作成  
+`npx create-react-app react_udemy  --template typescript`  
 
-### `npm run build`
+Reactルータのインストール  
+`npm install react-router-dom`  
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+chakra-uiのインストール  
+`npm install @chakra-ui/react @emotion/react @emotion/styled framer-motion`  
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+**69 ルーティングの設定**  
+@types/react-router-domはインストールせず、下記のコマンドでよい。  
+`npm install react-router-dom`  
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+react-router-dom バージョン6以降では、型定義がパッケージ自体に含まれているため、@types/react-router-dom を個別にインストールする必要はない。  
+今後ルーティング設定をするときは、バージョン6の書き方にするようにしなければならない。  
 
-### `npm run eject`
+React18において、VFCとFCは同じ意味であり、VFCは非推奨なので、FCを使用する。  
+React-router-dom6において、Switchは使用できず、Routesを使用する。  
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+**72 ヘッダーの作成(ルーティング機能実装)**  
+useHistoryはReact-router-dom5においての記法であり、バージョン6からは、useNavigateを使用する。  
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+**75 ログイン機能の実装**  
+Chakra uiのButtonの非活性は、disabledではなく、isDisabledを使用する。[参考](https://qiita.com/FumioNonaka/items/3f3be1fa53727d113562)
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+**81 ログインユーザー情報をContextに保持してみる**  
 
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+<Routes> コンポーネントの直接の子要素として <Route> または <React.Fragment> のみを使用する必要があるため、App.tsxにLoginUserProviderを記載。
