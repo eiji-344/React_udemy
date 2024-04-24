@@ -7,19 +7,19 @@ import { HeaderLayout } from "../components/templetes/HeaderLayout";
 
 export const Router: FC = memo(() => {
   return (
-    <Routes>
-        <Route path="/" element={<Login />} />
-        <Route path="/home/*" element={
-          <HeaderLayout>
-            <Routes>
-              {homeRoutes.map((route) => (
-                <Route key={route.path} path={route.path} element={route.element} />
-              ))}
-            </Routes>
-          </HeaderLayout>
-        } />
-        <Route path="*" element={<Page404 />} />
-    </Routes>
+      <Routes>
+            <Route path="/" element={<Login />} />
+            <Route path="/home/*" element={
+              <HeaderLayout>
+                <Routes>
+                  {homeRoutes.map((route) => (
+                    <Route key={route.path} path={route.path} element={route.element} />
+                  ))}
+                </Routes>
+              </HeaderLayout>
+            } />
+            <Route path="*" element={<Page404 />} />
+      </Routes>
   );
 });
 
